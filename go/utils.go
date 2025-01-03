@@ -115,6 +115,15 @@ func getFocalLengthInt(str string) int {
 	return fl
 }
 
+func sliceAtoi(in []string) []int {
+	var out []int
+	for i := 0; i < len(in); i++ {
+		j, _ := strconv.Atoi(in[i])
+		out = append(out, j)
+	}
+	return out
+}
+
 //EXIF utils
 
 func getExif(imgPath string) ExifData {
