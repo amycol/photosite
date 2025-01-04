@@ -2,6 +2,9 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
+	"os"
+	"slices"
 )
 
 func addcat(args AddCategoryArgs, db *sql.DB) int64 {
@@ -24,4 +27,26 @@ func addloc(args AddLocationArgs, db *sql.DB) int64 {
 	id, err := result.LastInsertId()
 	errCheckDB(err)
 	return id
+}
+
+func del(args DeletionArgs, db *sql.DB) {
+	//Check if table inputted is valid
+	//This helps to protect against SQL injection attacks
+	validTables := []string{"digitalPhotos", "digitalCameras", "lenses", "categories", "locations"}
+	if slices.Contains(validTables, args.table) != true {
+		os.Exit(1)
+	}
+	//Iterate over every inputted ID
+	for i := 0; i < len(args.ids); i++ {
+		//Write SQL statement
+		query := fmt.Sprintf("DELETE FROM %s WHERE ID = %d",
+			args.table, args.ids[i])
+		//Execute SQL statement
+		_, err := db.Exec(query)
+		errCheckDB(err)
+	}
+	//If photos table, delete image files
+	if args.table == "digitalPhotos" {
+		//delete file
+	}
 }

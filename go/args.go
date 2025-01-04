@@ -92,3 +92,14 @@ func addlocParseArgs() AddLocationArgs {
 	addlocCmd.Parse(os.Args[2:])
 	return args
 }
+
+func delParseArgs() DeletionArgs {
+	delCmd := flag.NewFlagSet("del", flag.ExitOnError)
+	args := DeletionArgs{}
+
+	delCmd.StringVar(&args.table, "table", "", "Database table to drop items from")
+
+	delCmd.Parse(os.Args[2:])
+	args.ids = sliceAtoi(os.Args[3:])
+	return args
+}

@@ -16,7 +16,7 @@ Binary will be located at `./photosite/go/build/photosite` on Linux/Unix/MacOS. 
 
 
 ## To Do
-Add deletion feature to backend 
+Add image deletion feature to backend 
 Add manual overrides to backend
 Complete HTML & PHP for admin panel
 Add CSS for admin panel 

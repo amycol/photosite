@@ -61,6 +61,10 @@ type AddLocationArgs struct {
 	latitude     float64
 	longitude    float64
 }
+type DeletionArgs struct {
+	table string
+	ids   []int
+}
 type ExifData struct {
 	FileName         string
 	ImageWidth       int

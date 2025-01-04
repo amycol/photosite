@@ -25,6 +25,9 @@ func main() {
 	case "addloc":
 		args := addlocParseArgs()
 		id = addloc(args, db)
+	case "del":
+		args := delParseArgs()
+		del(args, db)
 	}
 	endOut(id)
 	cleanup(db) //Clean temp files
