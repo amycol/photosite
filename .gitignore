@@ -1,5 +1,4 @@
 .DS_Store
-adminpanel/*
 go/build
 go/out
 go/tempfortesting
