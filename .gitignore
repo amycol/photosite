@@ -4,3 +4,6 @@ go/build
 go/out
 go/tempfortesting
 go/testImages
+testingdirs
+docker/testing
+docker/binaries

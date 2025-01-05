@@ -1,0 +1,1 @@
+docker run --rm --network photosite --name photosite -p 5503:80 -p 3306:3306 -v /Users/amy/Documents/College/Coursework/2024/photosite/adminpanel:/www:ro -v /Users/amy/Documents/College/Coursework/2024/photosite/testingDirs/db:/var/lib/mysql:Z -d photosite

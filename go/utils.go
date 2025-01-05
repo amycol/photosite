@@ -13,7 +13,7 @@ import (
 
 // Start & End
 func start() *sql.DB {
-	dbString := "photosite-go:gAFjxLWY9isu0lAklDTozN@tcp(ps-mariadb:3306)/photosite"
+	dbString := "photosite-go:gAFjxLWY9isu0lAklDTozN@tcp(127.0.0.1:3306)/photosite"
 	os.Mkdir("/tmp/photosite", 0755)
 	os.Mkdir("/tmp/photosite/img", 0755)
 	db := openDB(dbString)

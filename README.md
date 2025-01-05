@@ -16,14 +16,17 @@ Binary will be located at `./photosite/go/build/photosite` on Linux/Unix/MacOS. 
 
 
 ## To Do
+# Backend
+Add database initialisation subcommand to backend
 Add image deletion feature to backend 
 Add manual overrides to backend
+# Admin Panel
 Complete HTML & PHP for admin panel
 Add CSS for admin panel 
 Add login system
 Add deletion page to admin panel
+Add settings page to admin panel
+# Public Site
 Add image filtering & sorting to gallery
 Add full image viewer page 
 Implement automated time description feature on full image viewer and gallery pages
-Add settings page to admin panel
-Package everything into Docker image
