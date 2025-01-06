@@ -20,12 +20,16 @@ func start() *sql.DB {
 	return db
 }
 
-func endOut(id int64) {
+func endOut(id int64, idreturned bool) {
 	if id != 0 {
 		fmt.Println("Success!")
 		fmt.Println(id)
+	} else if !idreturned {
+		fmt.Println("Operation complete!")
+		fmt.Println(-1)
 	} else {
-		fmt.Println("Unknown failure! id returned as 0")
+		fmt.Println("Unknown failure! ID returned as 0")
+		fmt.Println(id)
 	}
 }
 

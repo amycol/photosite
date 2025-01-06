@@ -8,6 +8,7 @@ import (
 
 func main() {
 	var id int64
+	idreturned := true
 	db := start()
 	switch os.Args[1] {
 	case "addimg":
@@ -28,8 +29,9 @@ func main() {
 	case "del":
 		args := delParseArgs()
 		del(args, db)
+		idreturned = false
 	}
-	endOut(id)
+	endOut(id, idreturned)
 	cleanup(db) //Clean temp files
 	println("Operation Complete")
 	os.Exit(0)

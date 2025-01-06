@@ -33,21 +33,38 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Test page</title>
+    <title>Categories | photosite</title>
+    <link rel="stylesheet" href="css/tables.css">
 </head>
 
 <body>
     <div class="tabs"><?php include_once("php/tablist.php") ?></div>
+    
+    <form action="php/forms/delete.php" method="post">
+        <div class="table">
+            <div class="tr">
+                <span class="ts"></span>
+                <span class="th id">ID</span>
+                <span class="th">Category</span>
+                <span class="th">Description</span>
+            </div>
+            <?php
+                echo newGenTable("categories");
+            ?>
+        </div>
+    <input type="submit" name="categories" value="Delete Selected">
+    </form>
+
     <div class="content">
         <p>Add Category</p>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <form action="php/forms/add.php" method="post">
             <label for="name">Category name:</label><br>
             <input type="text" name="name" value="<?php echo $name;?>" <?php if($nameErr){echo $errCSS;}?>><br>
             <label for="desc">Category description:</label><br>
             <input type="text" name="desc" value="<?php echo $desc;?>"><br>
             
             <input type="submit" name="clear" value="Clear">
-            <input type="submit" name="submit" value="Submit">
+            <input type="submit" name="addcat" value="Submit">
         </form>
         <p <?php echo $outStyle; ?>class="output">
             Result: <?php echo $out[0]; ?><br>

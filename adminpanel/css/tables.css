@@ -1,0 +1,47 @@
+div.table 
+{
+    display:table;
+}
+div.tr
+{
+    display:table-row;
+}
+span.td, span.th
+{
+    display: table-cell;
+    padding: 5px;
+    width: 8em;
+    max-width: 8em;
+    height: 1em;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+span.th
+{
+    font-weight: bold;
+    border-bottom: 2px solid black;
+}
+div.tr
+{
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+span.ts
+{
+    border: none;
+}
+span.id
+{
+    width: 3em;
+}
+span.num
+{
+    width: 3em
+}
+form
+{
+    border: none;
+    padding: none;
+    margin: none;
+}
