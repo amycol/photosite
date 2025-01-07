@@ -46,13 +46,47 @@ function dbRead($table, $selector)
         return $dbres;
     }
 
+function getTableHeaders($table)
+    {
+        $db = dbConnect();
+    
+        // Write & execute DB query 
+        $sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'photosite' AND TABLE_NAME = '" . $table . "';";
+        $dbres = $db->query($sql);
+        
+        // Close database connection
+        $db->close();
+    
+        return $dbres;
+    }
+
 function genCell($data)
     {
         $cell = "<span class=\"td\" title=" . $data . ">" . $data . "</span>";
         return $cell;
     }
 
-function newGenTable($table)
+function genTableHeaders($table) 
+    {
+        $headers = "<div class=\"tr\"><span class=\"ts\"></span>";
+        $dbres = getTableHeaders($table);
+        if ($dbres->num_rows > 0) {
+            // Iterate through rows 
+            while($dbrow = $dbres->fetch_assoc()) {
+                $header = $dbrow["COLUMN_NAME"];
+                if ($header == "id") {
+                    $headers = $headers . "<span class=\"th id\">ID</span>";
+                } else {
+                    $header = ucfirst($header);
+                    $headers = $headers . "<span class=\"th\">" . $header . "</span>";
+                }
+            }
+        }
+        $headers = $headers . "</div>";
+        return $headers;
+    }
+
+function genTable($table)
     {
         $dbres = dbRead($table, "*");
         $rows = "";
@@ -78,7 +112,9 @@ function newGenTable($table)
                 $rows = $rows . $row;
             }
         }
-        return $rows;
+        $headers = genTableHeaders($table);
+        $out = $headers . $rows;
+        return $out;
     }
 ?>
 <!-- PHP Stuff

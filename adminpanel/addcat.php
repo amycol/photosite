@@ -1,35 +1,4 @@
-<?php
-    require __DIR__ . '/utils.php';
-    $name = $desc = ""; //Define variables
-    $nameErr = false;   //Define specific error variables
-    
-    if (($_SERVER["REQUEST_METHOD"] == "POST") && !(isset($_POST['clear']))) {
-        //Check required fields and format inputs for security
-        if (empty($_POST["name"])) {
-            $emptyErr = "Required field(s) left empty";
-            $nameErr = true;
-        } else {
-            $name = formatInput($_POST["name"]);
-        }
-
-        //Format other inputs for security
-        $desc = formatInput($_POST["desc"]);
-        
-        //If no errors
-        if (empty($emptyErr)) {
-            //Write shell command
-            $cmd = "/usr/local/bin/photosite addcat --name=\"$name\" --desc=\"$desc\"";
-            //Run Shell Command
-            exec($cmd, $out);
-            //Show output
-            $outStyle = "style=\"display:inline\"";
-        }
-    } else {
-        $name = $desc = ""; //Reset variables
-    }
-?>
-
-
+<?php require __DIR__ . '/utils.php';?>
 <!DOCTYPE html>
 
 <head>
@@ -42,14 +11,8 @@
     
     <form action="php/forms/delete.php" method="post">
         <div class="table">
-            <div class="tr">
-                <span class="ts"></span>
-                <span class="th id">ID</span>
-                <span class="th">Category</span>
-                <span class="th">Description</span>
-            </div>
             <?php
-                echo newGenTable("categories");
+                echo genTable("categories");
             ?>
         </div>
     <input type="submit" name="categories" value="Delete Selected">

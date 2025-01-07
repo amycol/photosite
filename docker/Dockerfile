@@ -17,7 +17,7 @@ ENV PHP_ERROR_REPORTING="E_COMPILE_ERROR\|E_RECOVERABLE_ERROR\|E_ERROR\|E_CORE_E
 ENV PHP_CGI_FIX_PATHINFO=0
 RUN echo Installing packages... &&\
     apk update &&\
-    apk add nginx php83-fpm php83-mysqli mariadb mariadb-client &&\
+    apk add nginx php83-fpm php83-mysqli mariadb mariadb-client imagemagick libwebp-tools &&\
     echo Configuring users... &&\
     mkdir /www &&\
     adduser -D -g 'www' www &&\
