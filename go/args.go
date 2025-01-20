@@ -10,23 +10,23 @@ func addimgParseArgs() AddImageArgs {
 	args := AddImageArgs{}
 
 	addimgCmd.StringVar(&args.imgPath, "img", "./img.png", "Input image path")
-	addimgCmd.StringVar(&args.outDir, "outdir", "./out", "Output directory path")
-	addimgCmd.BoolVar(&args.removeInputImgAtCompletion, "rm", false, "Remove input image on completion")
+	addimgCmd.StringVar(&args.outDir, "outdir", "/img", "Output directory path")
+	addimgCmd.BoolVar(&args.removeInputImgAtCompletion, "rm", true, "Remove input image on completion")
 	addimgCmd.IntVar(&args.fullResizeX, "fullresizex", 0, "Resolution X to resize fullscreen images to when converting to webp. Set as 0 to use input image resolution.")
 	addimgCmd.IntVar(&args.fullResizeY, "fullresizey", 0, "Resolution Y to resize fullscreen images to when converting to webp. Set as 0 to use input image resolution.")
 	addimgCmd.IntVar(&args.thumbResizeX, "thumbresizex", 0, "Resolution X to resize thumbnail images to when converting to webp. Set as 0 to use input image resolution / 3.")
 	addimgCmd.IntVar(&args.thumbResizeY, "thumbresizey", 0, "Resolution Y to resize thumbnail images to when converting to webp. Set as 0 to use input image resolution / 3.")
 	addimgCmd.IntVar(&args.fullQuality, "fullquality", 80, "Compression quality for fullscreen images when converting to webp")
 	addimgCmd.IntVar(&args.thumbQuality, "thumbquality", 80, "Compression quality for fullscreen images when converting to webp")
-	addimgCmd.StringVar(&args.fullLandscapeWMPath, "fulllandwmpath", "./watermarks/landscape.png", "Landscape fullscreen watermark path")
-	addimgCmd.StringVar(&args.fullPortraitWMPath, "fullportwmpath", "./watermarks/portrait.png", "Portrait fullscreen watermark path")
+	addimgCmd.StringVar(&args.fullLandscapeWMPath, "fulllandwmpath", "/opt/photosite/watermarks/landscape.png", "Landscape fullscreen watermark path")
+	addimgCmd.StringVar(&args.fullPortraitWMPath, "fullportwmpath", "/opt/photosite/watermarks/portrait.png", "Portrait fullscreen watermark path")
 	addimgCmd.IntVar(&args.fullWMOpacity, "fullwmopacity", 25, "Watermark fullscreen opacity")
-	addimgCmd.StringVar(&args.thumbLandscapeWMPath, "thumblandwmpath", "./watermarks/landscape.png", "Landscape thumbnail watermark path")
-	addimgCmd.StringVar(&args.thumbPortraitWMPath, "thumbportwmpath", "./watermarks/portrait.png", "Portrait thumbnail watermark path")
+	addimgCmd.StringVar(&args.thumbLandscapeWMPath, "thumblandwmpath", "/opt/photosite/watermarks/landscape.png", "Landscape thumbnail watermark path")
+	addimgCmd.StringVar(&args.thumbPortraitWMPath, "thumbportwmpath", "/opt/photosite/watermarks/portrait.png", "Portrait thumbnail watermark path")
 	addimgCmd.IntVar(&args.thumbWMOpacity, "thumbwmopacity", 25, "Watermark thumbnail opacity")
 	addimgCmd.BoolVar(&args.ignoreBlank, "ignoreblank", false, "Ignore blank fields before uploading image to database")
-	addimgCmd.IntVar(&args.categoryID, "catid", 0, "CategoryID")
-	addimgCmd.IntVar(&args.locationID, "locid", 0, "LocationID")
+	addimgCmd.IntVar(&args.categoryID, "categoryid", 0, "CategoryID")
+	addimgCmd.IntVar(&args.locationID, "locationid", 0, "LocationID")
 	addimgCmd.StringVar(&args.extraInfo, "extrainfo", "", "Extra info about the image")
 
 	addimgCmd.Parse(os.Args[2:])
@@ -38,6 +38,7 @@ func addcamParseArgs() AddCameraArgs {
 	args := AddCameraArgs{}
 
 	addcamCmd.StringVar(&args.imgPath, "img", "./img.png", "Input image path")
+	addcamCmd.BoolVar(&args.removeInputImgAtCompletion, "rm", true, "Remove input image on completion")
 	addcamCmd.IntVar(&args.serial, "serial", 0, "Camera serial number")
 	addcamCmd.StringVar(&args.manufacturer, "manufacturer", "", "Camera manufacturer")
 	addcamCmd.StringVar(&args.model, "model", "", "Camera model")
@@ -54,6 +55,7 @@ func addlensParseArgs() AddLensArgs {
 	args := AddLensArgs{}
 
 	addlensCmd.StringVar(&args.imgPath, "img", "./img.png", "Input image path")
+	addlensCmd.BoolVar(&args.removeInputImgAtCompletion, "rm", true, "Remove input image on completion")
 	addlensCmd.StringVar(&args.manufacturer, "manufacturer", "", "Lens manufacturer")
 	addlensCmd.StringVar(&args.mount, "mount", "", "Lens mount")
 	addlensCmd.IntVar(&args.blades, "blades", 0, "Lens aperture blade count, defaults to 0")
@@ -68,7 +70,7 @@ func addcatParseArgs() AddCategoryArgs {
 	args := AddCategoryArgs{}
 
 	addcatCmd.StringVar(&args.name, "name", "", "Category name")
-	addcatCmd.StringVar(&args.description, "desc", "", "Category description")
+	addcatCmd.StringVar(&args.description, "description", "", "Category description")
 
 	addcatCmd.Parse(os.Args[2:])
 	return args

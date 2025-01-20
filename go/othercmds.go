@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"slices"
+	"strconv"
 )
 
 func addcat(args AddCategoryArgs, db *sql.DB) int64 {
@@ -47,6 +48,16 @@ func del(args DeletionArgs, db *sql.DB) {
 	}
 	//If photos table, delete image files
 	if args.table == "digitalPhotos" {
-		//delete file
+		for i := 0; i < len(args.ids); i++ {
+			idStr := padIDString(strconv.Itoa(args.ids[i]))
+			//Delete files
+			thumbPath := fmt.Sprintf("/img/thumb/%st.webp",
+				idStr)
+			fullPath := fmt.Sprintf("/img/full/%sf.webp",
+				idStr)
+			err := os.Remove(thumbPath)
+			err = os.Remove(fullPath)
+			errCheckFile(err)
+		}
 	}
 }

@@ -1,6 +1,7 @@
 div.table 
 {
     display:table;
+    overflow: scroll;
 }
 div.tr
 {
@@ -43,5 +44,4 @@ form
 {
     border: none;
     padding: none;
-    margin: none;
 }

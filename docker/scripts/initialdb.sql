@@ -104,6 +104,16 @@ CREATE TABLE locations (
   PRIMARY KEY (id)
 );
 
+CREATE TABLE users (
+  id int NOT NULL AUTO_INCREMENT,
+  username tinytext,
+  passwordhash text,
+  salt text,
+  addphotoperm tinyint(1),
+  addotherperm tinyint(1),
+  deleteperm tinyint(1),
+  PRIMARY KEY (id)
+);
 
 ALTER TABLE filmPhotos
 ADD CONSTRAINT FK_filmPhotos_filmCameraID

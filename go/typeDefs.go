@@ -24,26 +24,28 @@ type AddImageArgs struct {
 	extraInfo                  string
 }
 type AddCameraArgs struct {
-	imgPath      string
-	serial       int
-	manufacturer string
-	model        string
-	imageWidth   int
-	imageHeight  int
+	imgPath                    string
+	removeInputImgAtCompletion bool
+	serial                     int
+	manufacturer               string
+	model                      string
+	imageWidth                 int
+	imageHeight                int
 }
 type AddLensArgs struct {
-	imgPath        string
-	serial         string
-	manufacturer   string
-	name           string
-	prime          bool
-	minFocalLength int
-	maxFocalLength int
-	minAperture    float32
-	maxAperture    float32
-	mount          string
-	blades         int
-	autofocus      bool
+	imgPath                    string
+	removeInputImgAtCompletion bool
+	serial                     string
+	manufacturer               string
+	name                       string
+	prime                      bool
+	minFocalLength             int
+	maxFocalLength             int
+	minAperture                float32
+	maxAperture                float32
+	mount                      string
+	blades                     int
+	autofocus                  bool
 }
 type AddCategoryArgs struct {
 	name        string
@@ -82,6 +84,7 @@ type ExifData struct {
 	Model            string
 	LensSerialNumber string
 	LensType         string
+	LensID           string
 	MaxFocalLength   string
 	MinFocalLength   string
 	MaxAperture      float32

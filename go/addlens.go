@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"os"
+	"strings"
 )
 
 func addlens(args AddLensArgs, db *sql.DB) int64 {
@@ -47,9 +48,11 @@ func writeLensDBInfo(args AddLensArgs, exif ExifData) lensDBInfo {
 	setValFlt(args.minAperture, exif.MinAperture, &dbInfo.minAperture)
 	setValFlt(args.maxAperture, exif.MaxAperture, &dbInfo.maxAperture)
 	//Set leftover DBInfo values
-	dbInfo.manufacturer = args.manufacturer
+	dbInfo.manufacturer = exif.Make
 	dbInfo.prime = (dbInfo.minFocalLength == dbInfo.maxFocalLength)
-	dbInfo.mount = args.mount
+	if strings.Contains(exif.LensID, "EF") {
+		dbInfo.mount = "EF"
+	}
 	dbInfo.blades = args.blades
 	dbInfo.autofocus = args.autofocus
 

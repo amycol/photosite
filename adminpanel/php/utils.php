@@ -32,12 +32,12 @@ function dbConnect()
         return $db;
     }
     
-function dbRead($table, $selector)
+function dbRead($table, $selector, $where)
     {
         $db = dbConnect();
     
         // Write & execute DB query 
-        $sql = "SELECT * FROM categories;";
+        $sql = "SELECT " . $selector . " FROM " . $table . $where . ";";
         $dbres = $db->query($sql);
         
         // Close database connection
@@ -46,39 +46,35 @@ function dbRead($table, $selector)
         return $dbres;
     }
 
-function genCell($data)
+function dbWrite($table, $columns, $data)
     {
-        $cell = "<span class=\"td\" title=" . $data . ">" . $data . "</span>";
-        return $cell;
+        $db = dbConnect();
+    
+        // Write & execute DB query 
+        $sql = "INSERT INTO " . $table . " (" . $columns . ") VALUES (" . $data . ");";
+        $dbres = $db->execute_query($sql);
+        if (!$dbres) {
+            // Close database connection
+            $db->close();
+            return false;
+        } else {
+            echo '<pre>'; print_r($dbres); echo '</pre>';
+            return $dbres;
+        }
     }
 
-function newGenTable($table)
+function getColumns($table)
     {
-        $dbres = dbRead($table, "*");
-        $rows = "";
-        if ($dbres->num_rows > 0) {
-            // Iterate through rows 
-            while($dbrow = $dbres->fetch_assoc()) {
-                // Generate the first two cells (selector checkbox & id)
-                $id = $dbrow["id"];
-                $selectorcell = "<span class=\"ts\"><input type=\"checkbox\" id=" . $id . " name=" . $id . " value=" . $id . "></span>";
-                $idcell = "<span class=\"td id\">" . $id . "</span>";
-                $f2cells = $selectorcell . $idcell;
+        $db = dbConnect();
     
-                $row = "<div class=\"tr\">" . $f2cells;
-                $isFirst = true;
-                foreach ($dbrow as $data) {
-                    if (!$isFirst) {
-                        $cell = genCell($data);
-                        $row = $row . $cell;
-                    }
-                    $isFirst = false;
-                }
-                $row = $row . "</div>";
-                $rows = $rows . $row;
-            }
-        }
-        return $rows;
+        // Write & execute DB query 
+        $sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'photosite' AND TABLE_NAME = '" . $table . "';";
+        $dbres = $db->query($sql);
+        
+        // Close database connection
+        $db->close();
+    
+        return $dbres;
     }
 ?>
 <!-- PHP Stuff

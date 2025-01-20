@@ -28,8 +28,8 @@ func writeimgDBInfo(exif ExifData, args AddImageArgs, db *sql.DB) imgDBInfo {
 	if strings.Contains(exif.Shutter, "/") { //String is a fraction and needs processing
 		shutter = strings.Split(exif.Shutter, "/")
 	} else { //String is a whole number and needs to be converted to a fraction
-		shutter[0] = exif.Shutter
-		shutter[1] = "1"
+		shutter = append(shutter, exif.Shutter)
+		shutter = append(shutter, "1")
 	}
 	shutterFloat640, err := strconv.ParseFloat(shutter[0], 32) //Convert strings to 32-bit float64
 	shutterFloat641, err := strconv.ParseFloat(shutter[1], 32)

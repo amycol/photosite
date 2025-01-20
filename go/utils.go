@@ -96,7 +96,7 @@ func checkIfExistsInDB(table string, column string, data string, db *sql.DB) boo
 
 // External commands
 func runCmd(cmd string) {
-	_, err := exec.Command("sh", "-c", cmd).Output()
+	_, err := exec.Command("/bin/sh", "-c", cmd).Output()
 	errCheckCmd(err)
 }
 
@@ -110,6 +110,7 @@ func padIDString(id string) string {
 
 func getFocalLengthInt(str string) int {
 	str, _ = strings.CutSuffix(str, ".0 mm")
+	str, _ = strings.CutSuffix(str, " mm")
 	fl, err := strconv.Atoi(str)
 	if err != nil {
 		fmt.Println("Issues processing focal length exif data. Try manual input.")

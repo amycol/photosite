@@ -1,9 +1,11 @@
 FROM alpine:3.21
 RUN mkdir /opt/photosite
+RUN mkdir /opt/photosite/uploads
 ADD ./scripts/ /opt/photosite/scripts/
 ADD ./nginx.conf /etc/nginx/nginx.conf
 ADD ./mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
 ADD ./binaries/photosite /usr/local/bin/photosite
+ADD ./assets/watermarks /opt/photosite/watermarks
 ENV PHP_FPM_USER="www"
 ENV PHP_FPM_GROUP="www"
 ENV PHP_FPM_LISTEN_MODE="0660"
@@ -17,14 +19,17 @@ ENV PHP_ERROR_REPORTING="E_COMPILE_ERROR\|E_RECOVERABLE_ERROR\|E_ERROR\|E_CORE_E
 ENV PHP_CGI_FIX_PATHINFO=0
 RUN echo Installing packages... &&\
     apk update &&\
-    apk add nginx php83-fpm php83-mysqli mariadb mariadb-client imagemagick libwebp-tools &&\
+    apk add nginx php83-fpm php83-mysqli mariadb mariadb-client imagemagick tiff libwebp-tools exiftool &&\
     echo Configuring users... &&\
     mkdir /www &&\
+    mkdir /img &&\
     adduser -D -g 'www' www &&\
     echo Configuring permissions... &&\
     chown -R www:www /var/lib/nginx &&\
     chown -R www:www /www &&\
+    chown -R www:www /img &&\
     chown -R www:www /usr/local/bin/photosite &&\
+    chown -R www:www /opt/photosite &&\
     echo Configuring packages... &&\
     sh /opt/photosite/scripts/php-conf.sh
 EXPOSE 80

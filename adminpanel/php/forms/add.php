@@ -1,5 +1,49 @@
 <?php
-    require '../../utils.php';
+    require '../utils.php';
+    error_reporting(E_ALL);
+    ini_set('display_errors', 'On');
+
+    function imgUpload($files) {
+        $targetDir = "/opt/photosite/uploads/";
+
+        // Iterate through uploaded files
+        while ($file = current($files)) {
+            $targetFile = $targetDir . basename($file['name']);
+            move_uploaded_file($file['tmp_name'], $targetFile);
+            next($files);
+        }
+    }
+
+    function imgProc($files, $post){
+        $targetDir = "/opt/photosite/uploads/";
+        //run photosite on images with args from form
+        while ($file = current($files)) {
+            $targetFile = $targetDir . basename($file['name']);
+            $cmd = writeCmd($post);
+            $cmd = $cmd . " -img=\"" . $targetFile . "\"";
+            exec($cmd, $out);
+            next($files);
+        }
+    }
+
+    function writeCmd($post) {
+        $post = array_filter($post); // Remove empty values from array
+        $cmd = "";
+        // Iterate through fields
+        while ($field = current($post)) {
+            if ($field != "Submit") {
+                // Add ID to list
+                $cmd = $cmd . " -" . strtolower(formatInput(key($post))) . "=\"" . formatInput($field) . "\"";
+            } else {
+                // Get key (element name), add to start of command string
+                $cmd = formatInput(array_search($field, $post)) . " " . $cmd;
+                // Write and execute shell command
+                $cmd = "/usr/local/bin/photosite " . $cmd;
+            }
+            next($post);
+        }
+        return $cmd;
+    }
 
     if (isset($_POST)) // Check if form data exists
     {
@@ -8,20 +52,13 @@
             // Send user back to previous page
             header('Location: ' . $_SERVER['HTTP_REFERER']);
         }
-        
-        $cmd = "";
-        // Iterate through fields
-        foreach ($_POST as $field) {
-            if ($field != "Submit") {
-                // Add ID to list
-                $cmd = $cmd . " -" . formatInput(array_search($field, $_POST)) . "=" . formatInput($field);
-            } else {
-                // Get key (element name), add to start of command string
-                $cmd = formatInput(array_search($field, $_POST)) . " " . $cmd;
-                // Write and execute shell command
-                $cmd = "/usr/local/bin/photosite " . $cmd;
-                exec($cmd, $out);
-            }
+        if (!empty($_FILES)) // Check if files have been uploaded
+        {
+            imgUpload($_FILES);
+            imgProc($_FILES, $_POST);
+        } else {
+            $cmd = writeCmd($_POST);
+            exec($cmd, $out);
         }
     }
     // Send user back to previous page
