@@ -1,4 +1,5 @@
-
+# IMPORTANT NOTE:
+### This project is currently very unfinished. It likely will not work at all. 
 # photosite
 ### A mostly automated photography website solution, features including optimising disk usage & bandwidth, automated time description and semi-automated image tagging. Designed with compatibility, speed and efficiency prioritised. 
 ## Build & Installation
