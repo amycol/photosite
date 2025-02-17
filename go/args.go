@@ -90,6 +90,7 @@ func addlocParseArgs() AddLocationArgs {
 	addlocCmd.StringVar(&args.continent, "continent", "", "Continent")
 	addlocCmd.Float64Var(&args.latitude, "latitude", 0, "Latitude")
 	addlocCmd.Float64Var(&args.longitude, "longitude", 0, "Longitude")
+	addlocCmd.StringVar(&args.timezone, "timezone", "UTC", "Timezone")
 
 	addlocCmd.Parse(os.Args[2:])
 	return args

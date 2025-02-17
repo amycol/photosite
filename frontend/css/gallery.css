@@ -1,0 +1,144 @@
+@import url('fonts.css');
+
+body {
+    margin: 0;
+}
+
+.sidebar {
+    float: left;
+    width: 180px;
+    margin-left: 100px;
+    height: 100vh;
+    overflow-y: scroll;
+    position: fixed;
+}
+
+.titlebar {
+    font-family: Comfortaa;
+    float: left;
+    background-color: black;
+    height: 100vh;
+    width: 100px;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+}
+
+.titlebar h1 {
+    font-weight: 900;
+    transform: rotate(90deg);
+    font-size: 6em;
+    margin: 0;
+}
+
+.titlebar h1 a {
+    color: white;
+    text-decoration: none;
+}
+
+.titlebar div {
+    position: absolute;
+    bottom: 0;
+    margin: auto;
+    padding: 0;
+}
+
+.titlebar div a {
+    color: black;
+    text-decoration: none;
+    font-size: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+.gallery-container {
+    margin: 0;
+    padding: 0;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    width: 100%-280px;
+    margin: 0;
+    padding: 0;
+    margin-left: 280px;
+}
+
+.gallery li {
+    flex: 1 1 auto;
+    height: 16em;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s 0.1s ease-in-out;
+    list-style-type: none;
+    overflow: hidden;
+    object-fit: contain;
+}
+
+.gallery::after {
+    content: "";
+    flex-grow: 999;
+  }
+  
+.gallery li img {
+    object-fit: cover;
+    /*height: auto;*/
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    border-radius: 10px;
+}
+
+.gallery li:hover {
+    transform: scale(1.04);
+}
+
+.filter-tree {
+    margin-left: 1em;
+    font-family: Comfortaa;
+}
+.tree-title {
+    margin: 0;
+    margin-left: -2.25em;
+    background-color: white;
+    font-weight: 700;
+    z-index: -999;
+}
+.filter-tree a {
+    color: black;
+    text-decoration: none;
+}
+.filter-tree a:hover {
+    font-weight: 700;
+}
+.filter-tree li {
+    list-style-type: none;
+    margin-left: -2em;
+    padding-left: 1em;
+    border-left: 1px solid black;
+    background-color: white;
+}
+.filter-tree li:last-child {
+    border: none;
+}
+.filter-tree li::before {
+    position: relative;
+    content: "";
+    display: inline-block;
+    border-bottom: 1px solid black;
+    height: 1em;
+    width: 12px;
+    left: -8px;
+    top: -0.5em;
+    margin-left: -0.5em;
+}
+.filter-tree li:only-of-type::before {
+    margin-top: 0.6em;
+    height: 0.6em;
+}
+.filter-tree li:last-child::before {
+    border-left: 1px solid black;
+}

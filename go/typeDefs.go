@@ -62,6 +62,7 @@ type AddLocationArgs struct {
 	continent    string
 	latitude     float64
 	longitude    float64
+	timezone     string
 }
 type DeletionArgs struct {
 	table string

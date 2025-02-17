@@ -1,6 +1,16 @@
 <?php
 require 'utils.php';
 
+function genTimezoneOptions()
+{
+    $options = "";
+    $timezones = DateTimeZone::listIdentifiers();
+    foreach ($timezones as $timezone) {
+        $options = $options . "<option value=\"" . $timezone . "\">" . $timezone . "</option>";
+    }
+    return $options;
+}
+
 function genCell($data)
     {
         $cell = "<span class=\"td\" title=" . $data . ">" . $data . "</span>";
@@ -30,7 +40,7 @@ function genTableHeaders($table)
 function genTable($table)
     {
         $start = "<form action=\"php/forms/delete.php\" method=\"post\"><div class=\"table\">";
-        $end = "</div><input type=\"submit\" name=\"" . $table . "\" value=\"Delete Selected\"></form>";
+        $end = "</div><input class=\"del-button\" type=\"submit\" name=\"" . $table . "\" value=\"Delete Selected\"></form>";
 
         $dbres = dbRead($table, "*", "");
         $rows = "";
@@ -39,7 +49,7 @@ function genTable($table)
             while($dbrow = $dbres->fetch_assoc()) {
                 // Generate the first two cells (selector checkbox & id)
                 $id = $dbrow["id"];
-                $selectorcell = "<span class=\"ts\"><input type=\"checkbox\" id=" . $id . " name=" . $id . " value=" . $id . "></span>";
+                $selectorcell = "<span class=\"ts\"><input class=\"checkbox\" type=\"checkbox\" id=" . $id . " name=" . $id . " value=" . $id . "></span>";
                 $idcell = "<span class=\"td id\">" . $id . "</span>";
                 $f2cells = $selectorcell . $idcell;
     
@@ -65,7 +75,7 @@ function genUploadForm($table) {
     $uploadTables = array("digitalCameras", "digitalPhotos", "lenses");
     $field = "";
     if (in_array($table, $uploadTables)) {
-        return "<input type=\"file\" id=\"imgFile\" name=\"imgFile\">";
+        return "<input class=\"file-upload\" type=\"file\" id=\"imgFile\" name=\"imgFile\">";
     } else {
         return "";
     }
@@ -87,11 +97,23 @@ function genAddForm($table, $subcmd)
             $i = 0;
             while($dbrow = $dbres->fetch_assoc()) {
                 $fieldname = $dbrow["COLUMN_NAME"];
-                if ($fieldname != "id") {
+                if (($fieldname != "id") && ($fieldname != "timezone")) {
                     $formField = "
                     <div class=\"formField\">
                     <label for=" . "\"$fieldname\"" . ">" . ucfirst($fieldname) . ":</label><br>
                     <input type=\"text\" name=" . "\"$fieldname\"" . "><br></div>";
+                    if ($i % 2 == 1) {
+                        $formField = $formField . "<div class=\"formNewLine\"></div>";
+                    }
+                    $form = $form . $formField;
+                    $i = $i + 1;
+                } elseif ($fieldname == "timezone") {
+                    $formField = "
+                    <div class=\"formField\">
+                    <label for=" . "\"$fieldname\"" . ">" . ucfirst($fieldname) . ":</label><br>
+                    <select name=" . "\"$fieldname\"" . ">" .
+                    genTimezoneOptions() .
+                    "</select><br></div>";
                     if ($i % 2 == 1) {
                         $formField = $formField . "<div class=\"formNewLine\"></div>";
                     }

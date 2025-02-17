@@ -1,0 +1,35 @@
+@font-face {
+    font-family: "Sono";
+    src: url("../fonts/sono-regular.woff2") format('woff2');
+    font-weight: 400;
+}
+@font-face {
+    font-family: "Sono";
+    src: url("../fonts/sono-light.woff2") format('woff2');
+    font-weight: 300;
+}
+@font-face {
+    font-family: "Sono";
+    src: url("../fonts/sono-extralight.woff2") format('woff2');
+    font-weight: 200;
+}
+@font-face {
+    font-family: "Sono";
+    src: url("../fonts/sono-medium.woff2") format('woff2');
+    font-weight: 500;
+}
+@font-face {
+    font-family: "Sono";
+    src: url("../fonts/sono-semibold.woff2") format('woff2');
+    font-weight: 600;
+}
+@font-face {
+    font-family: "Sono";
+    src: url("../fonts/sono-bold.woff2") format('woff2');
+    font-weight: 700;
+}
+@font-face {
+    font-family: "Sono";
+    src: url("../fonts/sono-extrabold.woff2") format('woff2');
+    font-weight: 800;
+}

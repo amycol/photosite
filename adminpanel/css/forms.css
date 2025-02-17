@@ -1,10 +1,48 @@
+@import url('fonts.css');
+
 .formField {
     float: left;
     padding-right: 1em;
+    font-family: 'Sono';
+    width: 20%;
 }
 .formNewLine {
     clear: both;
 }
 .formHeader {
     margin-bottom: 0.5em;
+    font-family: 'Sono';
+}
+input, select
+{
+    font-family: 'Sono';
+    width: 100%;
+    border-radius: 10px;
+    border-width: 2px;
+    border-style: solid;
+    margin: 0.1em;
+}
+.checkbox
+{
+    width: 1em;
+}
+.formButtons
+{
+    width: 10%;
+}
+.file-upload
+{
+    font-family: 'Sono';
+    width: 20%;
+    border: none;
+    border-radius: 0;
+}
+.file-upload::file-selector-button
+{
+    font-family: 'Sono';
+    width: 30%;
+    border-radius: 10px;
+    border-width: 2px;
+    border-style: solid;
+    margin: 0.1em;
 }

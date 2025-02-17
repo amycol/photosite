@@ -1,3 +1,5 @@
+@import url('fonts.css');
+
 div.table 
 {
     display:table;
@@ -20,13 +22,15 @@ span.td, span.th
 }
 span.th
 {
+    font-family: 'Sono';
     font-weight: bold;
     border-bottom: 2px solid black;
 }
 div.tr
 {
-  border: 1px solid black;
-  border-collapse: collapse;
+    font-family: 'Sono';
+    border: 1px solid black;
+    border-collapse: collapse;
 }
 span.ts
 {
@@ -44,4 +48,9 @@ form
 {
     border: none;
     padding: none;
+}
+input.del-button
+{
+    font-family: 'Sono';
+    width: 10%;
 }

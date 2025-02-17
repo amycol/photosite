@@ -3,6 +3,7 @@
 
 <head>
     <title>Cameras | photosite</title>
+    <link rel="stylesheet" href="css/tablist.css">
     <link rel="stylesheet" href="css/tables.css">
     <link rel="stylesheet" href="css/forms.css">
 </head>

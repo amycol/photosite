@@ -101,6 +101,7 @@ CREATE TABLE locations (
   continent tinytext,
   latitude decimal(8,5),
   longitude decimal(8,5),
+  timezone tinytext,
   PRIMARY KEY (id)
 );
 

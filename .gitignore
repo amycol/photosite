@@ -6,3 +6,4 @@ go/testImages
 testingdirs
 docker/testing
 docker/binaries
+go-pp

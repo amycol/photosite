@@ -5,8 +5,9 @@
         // Iterate through fields
         foreach ($_POST as $field) {
             if (is_numeric($field)) {
-                // Add ID to list
+                // Add ID to array and command
                 $cmd = $cmd . " " . $field;
+                
             } else {
                 // Get key (element name), add to start of command string
                 $cmd = array_search ($field, $_POST) . " " . $cmd;

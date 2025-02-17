@@ -1,7 +1,5 @@
 <?php
     require '../utils.php';
-    error_reporting(E_ALL);
-    ini_set('display_errors', 'On');
 
     function imgUpload($files) {
         $targetDir = "/opt/photosite/uploads/";
@@ -21,7 +19,9 @@
             $targetFile = $targetDir . basename($file['name']);
             $cmd = writeCmd($post);
             $cmd = $cmd . " -img=\"" . $targetFile . "\"";
+            echo "files " . $cmd;
             exec($cmd, $out);
+            echo $cmd;
             next($files);
         }
     }
@@ -52,6 +52,7 @@
             // Send user back to previous page
             header('Location: ' . $_SERVER['HTTP_REFERER']);
         }
+        print_r($_FILES);
         if (!empty($_FILES)) // Check if files have been uploaded
         {
             imgUpload($_FILES);
@@ -59,8 +60,9 @@
         } else {
             $cmd = writeCmd($_POST);
             exec($cmd, $out);
+            echo $cmd;
         }
     }
     // Send user back to previous page
-    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    //header('Location: ' . $_SERVER['HTTP_REFERER']);
 ?>

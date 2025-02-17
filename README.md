@@ -16,19 +16,55 @@ make
 Binary will be located at `./photosite/go/build/photosite` on Linux/Unix/MacOS. Untested on Windows but will likely be located at `./photosite/go/build/photosite.exe`
 
 
+ONLY WORKS WITH JPEG
+    PNG untested
+    TIFF either mutes or oversaturates colours, and messes with contrast
+    JPEG seems to work fine
+    This is an issue with CWEBP
+
 ## To Do
 # Backend
-Add manual overrides to backend --
-Add comments to SQL columns 
+Add manual overrides to backend -- x 
+Add comments to SQL columns to indicate optional overrides x
 # Admin Panel
-Complete admin panel pages --
-    Add colours to represent optional overrides
-Add CSS for admin panel *
-Add login system
-Add settings page to admin panel ?
+Add colours to represent optional overrides x
+Add login system ? x
+Add settings page to admin panel ? x
 # Public Site
-Add image filtering & sorting to gallery
-Add full image viewer page 
-Implement automated time description feature on full image viewer and gallery pages * 
+
+
+
+
+
+
+
+
+
+
+
+
+
+# PreProcessor //
+Literally everything
+# PSUP Files //
+Renamed ZIP (Like JAR)
+Contains data to verify where the pre-processor came from
+imgs.json contains array of all images and their original names
+Structure
+    pack.psup
+        info.json
+        imgs.json
+        img
+            full
+                0001.webp
+            thumb
+                0001.webp
+        exif
+            0001.json
+        
 
 # Bugs
+
+
+ 
+command line admin client would be nice but probably wont have time
