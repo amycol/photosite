@@ -1,3 +1,4 @@
+### I created this project for my Computer Science A-Level coursework. 
 # IMPORTANT NOTE:
 ### This project is currently very unfinished. It likely will not work at all. 
 # photosite
